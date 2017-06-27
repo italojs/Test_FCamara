@@ -41,7 +41,7 @@ namespace TestFCamara.Api.Controllers
 
         [HttpPost]
         [AllowAnonymous]
-        [Route("v1/authenticate")]
+        [Route("v1/authenticateUser")]
         public async Task<IActionResult> Post([FromForm] AuthenticateUserCommand command)
         {
             if (command == null)
