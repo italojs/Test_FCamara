@@ -1,5 +1,6 @@
 namespace FCamara.Infra.Migrations
 {
+    using FCamaraProject.Domain.Entities;
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
@@ -14,18 +15,12 @@ namespace FCamara.Infra.Migrations
 
         protected override void Seed(FCamaraProject.Infra.Contexts.FCamaraDataContext context)
         {
-            //  This method will be called after migrating to the latest version.
-
-            //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
-            //  to avoid creating duplicate seed data. E.g.
-            //
-            //    context.People.AddOrUpdate(
-            //      p => p.FullName,
-            //      new Person { FullName = "Andrew Peters" },
-            //      new Person { FullName = "Brice Lambson" },
-            //      new Person { FullName = "Rowan Miller" }
-            //    );
-            //
+            for(int i =0; i <= 10; i++)
+            {
+                context.Products.Add(new Product("pipoca" + i.ToString(), i));
+            }
+            context.SaveChanges();
+            
         }
     }
 }
