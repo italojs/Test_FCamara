@@ -8,13 +8,19 @@ This is a simple FCamara test
 
 ### Getting Started
 
-Creatting database:
-- After open the solution set the TestFCamara.Infra project as "startup project";
-- Write `update-database` in Package Manager Console;
-- Verify if the dabase was created;a
+Setup your connection string at `...\src\FCamara.Shared\Runtime.cs`  and `...\src\FCamara.Api\appsettings.json`
+
+Create database:
+- Set the TestFCamara.Infra project as "startup project";
+- Write in Package Manager Console: `Enable-migrations` -> `Add-migration v1` -> `Update-database` ;
+- Verify if the dabase was created;
+
+Stup the FCamara.Api project as  "startup project";
+Run with FCamara.Api Server(kestrel server);
 
 ### Routes
-#### `/v1/customers`  
+By deafault the server is ruinnig at port 5000.
+#### `/v1/register/user`  
 use this route to crate users in database.
 
 Type: Post
@@ -24,14 +30,12 @@ HEADERS: ```"Content-Type":"application/json"```
 FromBody:
 ```
 {
-  "firstname":"your first name",
-  "lastname":"your last nam",
   "username":"someUserName",
   "password":"SomePassWord"
 }
 ```
 
-#### `v1/authenticateUser"` 
+#### `v1/authenticate/user"` 
 use this route to authenticate a user in login.
 
 Type: Post
@@ -45,3 +49,6 @@ FromForm:
  "password":"password"
 }
 ```
+
+#### `v1/get/products`
+Required athentication
