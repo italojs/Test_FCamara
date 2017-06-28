@@ -1,29 +1,58 @@
 # Test_FCamara_API
 
-This is a simple FCamara test 
+This is a simple FCamara test
+
+## Obs
+
+ This API use:
+ - CQRS pattern: entity framqord to write and Dapper to read;
+ - jwt Bearer authentication;
+ - Sql Server;
 
 ## Prerequisites
 
-- .net core framework installed
+- .net core framework installed;
+- Entity framework installed(FCamara.infra project and FCamara.API project);
+- If the FCamara.infra throw some exeption ina query, install the Dapper package
 
 ### Getting Started
 
-Setup your connection string at `...\src\FCamara.Shared\Runtime.cs`  and `...\src\FCamara.Api\appsettings.json`
+Setup your Sql Server connection string at `...\src\FCamara.Shared\Runtime.cs`  and `...\src\FCamara.Api\appsettings.json`
 
 Create database:
-- Set the TestFCamara.Infra project as "startup project";
+- Set the FCamara.Infra project as "startup project";
 - Write in Package Manager Console: `Enable-migrations` -> `Add-migration v1` -> `Update-database` ;
 - Verify if the dabase was created;
+- Verify if the tables is seeded
 
-Stup the FCamara.Api project as  "startup project";
-Run with FCamara.Api Server(kestrel server);
+- Setup the FCamara.Api project as  "startup project";
+
+- Run with FCamara.Api Server(kestrel server);
+
+## Users
+
+username: italo
+
+password: nest@123
+
+## Expiration timeout
+
+Default expiration timeout: 1 minute.
+
+You can change it in FCamara.API project on Security folder in TokenOptions.cs, just change the `ValidFor` propertie. 
+
 
 ### Routes
-By deafault the server is ruinnig at port 5000.
-#### `/v1/register/user`  
-use this route to crate users in database.
+
+By deafault the server(kestrel) is ruinnig at port 5000.
+
+#### `/v1/register/user` 
+ 
+Crate users in database.
 
 Type: Post
+
+Required authentication: no
 
 HEADERS: ```"Content-Type":"application/json"```
 
@@ -36,9 +65,12 @@ FromBody:
 ```
 
 #### `v1/authenticate/user"` 
-use this route to authenticate a user in login.
+
+Authenticate a user in login.
 
 Type: Post
+
+Required authentication: no
 
 HEADERS: ```"Content-Type":"application/json"```
 
@@ -51,4 +83,17 @@ FromForm:
 ```
 
 #### `v1/get/products`
-Required athentication
+
+List all database products
+
+Type: Get
+
+Required authentication: yes
+
+HEADERS:
+ ```
+"Content-Type":"application/json"
+"Autorization":"Bearer eyJhbGciOiJIU..."
+```
+
+

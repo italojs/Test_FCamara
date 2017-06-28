@@ -15,6 +15,8 @@ namespace FCamara.Infra.Migrations
 
         protected override void Seed(FCamaraProject.Infra.Contexts.FCamaraDataContext context)
         {
+            context.Users.Add(new User("italo", "1fad9f339897ffb41f319254fe37d26e"));
+
             for(int i =0; i <= 10; i++)
             {
                 context.Products.Add(new Product("pipoca" + i.ToString(), i));

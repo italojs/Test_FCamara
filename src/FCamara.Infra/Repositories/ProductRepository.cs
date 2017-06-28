@@ -30,7 +30,7 @@ namespace FCamaraProject.Infra.Repositories
 
         public IEnumerable<GetProductListCommandResult> Get()
         {
-            var query = "SELECT [Id], [Title], [Price], FROM [Product]";
+            var query = "SELECT * FROM [Product]";
             using (var conn = new SqlConnection(Runtime.ConnectionString))
             {
                 conn.Open();
